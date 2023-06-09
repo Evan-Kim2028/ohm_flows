@@ -32,6 +32,11 @@ for subfolder in ['balv2', 'curve', 'sushi', 'univ3']:
 
 dexes_agg = pl.concat(dfs_dex_agg)
 
+# convert timestamp to datetime
+dexes_agg = dexes_agg.with_columns(
+       pl.from_epoch("timestamp")
+   )
+
 # save dexes to dex_swaps folder
 dexes_agg.write_parquet(f'data/dexes_agg.parquet')
 
